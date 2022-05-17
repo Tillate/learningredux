@@ -1,3 +1,5 @@
+import apiFirebase from "../config/api.firebase";
+
 export const ADD_TODO = "add todo";
 export const DELETE_TODO = "delete todo";
 export const SET_FILTER = "set filter";
@@ -59,5 +61,20 @@ export const fetchTodoError = (error) => {
   return {
     type: FETCH_TODO_ERROR,
     error,
+  };
+};
+
+export const fetchTodo = () => {
+  return (dispatch) => {
+    dispatch(requestTodo());
+    return apiFirebase.get("todos.json").then(
+      (response) => {
+        const data = response.data;
+        dispatch(fetchTodoSuccess(data));
+      },
+      (error) => {
+        dispatch(fetchTodoSuccess(error));
+      }
+    );
   };
 };

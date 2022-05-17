@@ -45,21 +45,30 @@ export const todos = (
     case actions.REQUEST_TODO: {
       return {
         ...state,
-        loading: true
-      }
+        loading: true,
+      };
     }
     case actions.FETCH_TODO_SUCCESS: {
-      return {
-        ...state,
-        data: [...state.data, action.todo],
-        error: null
+      if (action.todos) {
+        return {
+          ...state,
+          data: [...state.data, action.todos],
+          loading: false,
+          error: null,
+        };
+      } else {
+        return {
+          ...state,
+          loading: false,
+        };
       }
     }
     case actions.FETCH_TODO_ERROR: {
       return {
         ...state,
-        error: action.error
-      }
+        loading: false,
+        error: action.error,
+      };
     }
     default: {
       return state;
