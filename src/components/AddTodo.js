@@ -1,5 +1,5 @@
-import { connect } from "react-redux";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { tryAddTodo } from "../store/actions";
 
 class AddTodo extends Component {
@@ -11,18 +11,16 @@ class AddTodo extends Component {
   submitTodo = () => {
     this.props.tryAddTodo({
       name: this.input.current.value,
-      done: false
-    })
-    this.input.current.value='';
+      done: false,
+    });
+    this.input.current.value = "";
   };
 
   render() {
     return (
-      <div className="d-flex mb-4 gap-5">
-        <input ref={this.input} type="text" className="form-control" />
-        <button className="btn btn-success" onClick={this.submitTodo}>
-          Ajouter
-        </button>
+      <div className="d-flex mb-4">
+        <input ref={this.input} type="text" className="form-control mr-5" />
+        <button onClick={this.submitTodo} className="btn btn-success">Ajouter</button>
       </div>
     );
   }

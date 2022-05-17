@@ -19,8 +19,8 @@ class App extends Component {
           </div>
           <div className="card-body">
             <Switch>
-              <Route path="/:filter" component={ TodoList } />
-              <Redirect to="/all" />
+              <Route path="/todos/:filter" component={ TodoList } />
+              <Redirect to="/todos/all" />
             </Switch>
           </div>
         </div>

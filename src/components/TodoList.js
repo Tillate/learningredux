@@ -39,9 +39,5 @@ export default connect(
       todos: filteredTodoDataSelector(state, filter),
     };
   },
-  {
-    toggleTodo,
-    deleteTodo,
-    fetchTodo,
-  }
+  { toggleTodo, deleteTodo, fetchTodo }
 )(TodoList);

@@ -1,21 +1,16 @@
 import * as reducers from "./reducers";
-import { combineReducers, applyMiddleware, createStore } from "redux";
-// import { configureStore } from "@reduxjs/toolkit";
-import logger from "redux-logger";
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { combineReducers, applyMiddleware } from "redux";
+import { createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 
-const todosReducer = combineReducers(reducers);
+const todoAppReducer = combineReducers(reducers);
 
-const middlewares = [thunkMiddleware];
+const middleware = [thunkMiddleware];
 
-if (process.env.NODE_ENV === 'development') {
-    middlewares.push(logger);
-}
-
-const store = createStore(todosReducer,composeWithDevTools(applyMiddleware(...middlewares)));
-// let store = configureStore({
-//   reducer: todosReducer,
-// }, applyMiddleware(logger));
+const store = createStore(
+  todoAppReducer,
+  composeWithDevTools(applyMiddleware(...middleware))
+);
 
 export default store;

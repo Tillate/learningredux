@@ -3,9 +3,8 @@ import { createSelector } from "reselect";
 export const filterSelector = (state, filter) => filter;
 export const todosSelector = (state) => state.todos;
 
-export const todosListSelector = createSelector(
-  [todosSelector],
-  (todos) => todos.data
+export const todosListSelector = createSelector([todosSelector], (todos) =>
+  todos ? todos.data : null
 );
 
 export const filteredTodoDataSelector = createSelector(
@@ -13,12 +12,11 @@ export const filteredTodoDataSelector = createSelector(
   (filter, todos) => {
     if (todos && filter) {
       switch (filter) {
-        case 'done': {
+        case "done": {
           return todos.filter((t) => t.done);
         }
-        case 'active': {
-          todos.filter((t) => !t.done);
-          break;
+        case "active": {
+          return todos.filter((t) => !t.done);
         }
         default: {
           return todos;

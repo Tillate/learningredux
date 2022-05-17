@@ -1,7 +1,6 @@
 import apiFirebase from "../config/api.firebase";
 
 export const DELETE_TODO = "delete todo";
-export const SET_FILTER = "set filter";
 export const TOGGLE_TODO = "toggle todo";
 
 export const TRY_ADD_TODO = "try add todo";
@@ -12,7 +11,6 @@ export const REQUEST_TODO = "request todo";
 export const FETCH_TODO = "fetch todo";
 export const FETCH_TODO_SUCCESS = "fetch todo success";
 export const FETCH_TODO_ERROR = "fetch todo error";
-
 
 export const tryAddTodo = (todo) => {
   return (dispatch, getState) => {
@@ -44,7 +42,6 @@ export const deleteTodo = (index) => {
     index,
   };
 };
-
 
 export const toggleTodo = (index) => {
   return {
@@ -82,7 +79,7 @@ export const fetchTodo = () => {
         dispatch(fetchTodoSuccess(data));
       },
       (error) => {
-        dispatch(fetchTodoSuccess(error));
+        dispatch(fetchTodoError(error));
       }
     );
   };
