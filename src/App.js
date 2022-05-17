@@ -1,29 +1,18 @@
-import React, { Component } from 'react';
-import AddTodo from './components/AddTodo';
-import Filter from './components/Filter';
-import TodoList from './components/TodoList';
-import { BrowserRouter as Switch, Route, Redirect } from 'react-router-dom'; 
+import React, { Component, lazy, Suspense } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
+
+const LazyTodos = lazy(() => import("./features/todos"));
 
 class App extends Component {
   render() {
     return (
       <div className="container p-5">
-        <h4>Ajouter une todo</h4>
-        <hr className="my-4" />
-        <AddTodo />
-        <hr className="my-4" />
-        <div className="card">
-          <div className="card-header d-flex flex-row align-items-center">
-            <span className="flex-fill">Todo list</span>
-            <Filter />
-          </div>
-          <div className="card-body">
-            <Switch>
-              <Route path="/todos/:filter" component={ TodoList } />
-              <Redirect to="/todos/all" />
-            </Switch>
-          </div>
-        </div>
+        <Suspense fallback={<h1>Loading ...</h1>}>
+          <Switch>
+            <Route path="/" component={LazyTodos} />
+            <Redirect to="/todos" />
+          </Switch>
+        </Suspense>
       </div>
     );
   }

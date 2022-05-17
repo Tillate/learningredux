@@ -1,4 +1,4 @@
-import apiFirebase from "../config/api.firebase";
+import apiFirebase from "../../../config/api.firebase";
 
 export const DELETE_TODO = "delete todo";
 export const TOGGLE_TODO = "toggle todo";

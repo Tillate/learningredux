@@ -18,9 +18,9 @@ class AddTodo extends Component {
 
   render() {
     return (
-      <div className="d-flex mb-4">
-        <input ref={this.input} type="text" className="form-control mr-5" />
-        <button onClick={this.submitTodo} className="btn btn-success">Ajouter</button>
+      <div className="d-flex mb-4 gap-3">
+        <input ref={this.input} type="text" className="form-control" />
+        <button onClick={this.submitTodo} className="btn btn-success ">Ajouter</button>
       </div>
     );
   }
