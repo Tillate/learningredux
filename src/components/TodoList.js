@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import TodoItem from "./TodoItem";
 import { connect } from "react-redux";
-import { visibilityFilters, toggleTodo, deleteTodo, fetchTodo } from "../store/actions";
+import {
+  toggleTodo,
+  deleteTodo,
+  fetchTodo,
+} from "../store/actions";
+import { filteredTodoDataSelector } from "../store/selectors";
 
 class TodoList extends Component {
   constructor(props) {
@@ -28,32 +33,15 @@ class TodoList extends Component {
 }
 
 export default connect(
-  (state) => {
-    // console.log({state});
-    const filter = state.filter;
-    let todos;
-    switch (filter) {
-      case visibilityFilters.SHOW_DONE: {
-        todos = state.todos.data.filter((t) => t.done);
-        break;
-      }
-      case visibilityFilters.SHOW_ACTIVE: {
-        todos = state.todos.data.filter((t) => !t.done);
-        break;
-      }
-      default: {
-        todos = state.todos.data;
-        break;
-      }
-    }
-
+  (state, ownProps) => {
+    const filter = ownProps.match.params.filter;
     return {
-      todos,
+      todos: filteredTodoDataSelector(state, filter),
     };
   },
   {
     toggleTodo,
     deleteTodo,
-    fetchTodo
+    fetchTodo,
   }
 )(TodoList);
